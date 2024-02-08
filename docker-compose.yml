@@ -1,20 +1,20 @@
 services:
 
-  template_backend:
-    container_name: template_backend
+  taic_app:
+    container_name: taic_app
     build: .
     restart: unless-stopped
     volumes:
-      - ./template_backend:/var/www/html
+      - ./taic_app:/var/www/html
     ports:
       - 8000:80
 
   mysql_db:
-    container_name: mysql_db_backend
+    container_name: mysql_db_taic
     image: mysql:8.0.33
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: template_backend
+      MYSQL_DATABASE: taicApp
     # volumes:
     #   - ./backups:/home/backups
     restart: unless-stopped
@@ -22,7 +22,7 @@ services:
     - 3300:3306
   
   phpmyadmin:
-    container_name: phpmyadmin_backend
+    container_name: phpmyadmin_taic
     image: phpmyadmin:5.2.1
     ports:
       - 8011:80

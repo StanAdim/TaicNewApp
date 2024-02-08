@@ -10,23 +10,24 @@ up:
 	docker compose up -d
 
 composer-update:
-	docker exec template_backend bash -c "composer update"
-	docker exec template_backend bash -c "php artisan key:generate"
+	docker exec taic_app bash -c "composer update"
+	docker exec taic_app bash -c "cp .env.example .env"
+	docker exec taic_app bash -c "php artisan key:generate"
 	
 optimize:
-	docker exec template_backend bash -c "php artisan optimize:fresh"
+	docker exec taic_app bash -c "php artisan optimize:fresh"
 data:
-	docker exec template_backend bash -c "php artisan migrate:fresh --seed"
+	docker exec taic_app bash -c "php artisan migrate:fresh --seed"
 
 bash:
-	docker exec -it template_backend bash
+	docker exec -it taic_app bash
 
 fresh:
 	docker compose restart
 rmi:
-	docker image rm -f template_backend-template_backend
+	docker image rm -f taic_app-taic_app
 logs: 
-	docker logs -f template_backend
+	docker logs -f taic_app
 
 # backup_db: 
 	# docker exec mysql_db bash -c "./home/backups/backup_script.sh"
